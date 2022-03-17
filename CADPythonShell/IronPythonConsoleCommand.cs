@@ -8,6 +8,7 @@ using Microsoft.Scripting;
 using Application = Autodesk.AutoCAD.ApplicationServices.Core.Application;
 using Exception = System.Exception;
 using Forms = System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 namespace CADPythonShell
 {
@@ -36,7 +37,6 @@ namespace CADPythonShell
                     .SetupEnvironment(host.Engine, host.Console.ScriptScope);
 
                 host.Console.ScriptScope.SetVariable("__window__", gui);
-
                 // run the initscript
                 var initScript = CADPythonShellApplication.GetInitScript();
                 if (initScript != null)

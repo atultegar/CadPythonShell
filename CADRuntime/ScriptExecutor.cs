@@ -106,7 +106,8 @@ namespace CADRuntime
             // use embedded python lib
             var asm = this.GetType().Assembly;
             var resQuery = from name in asm.GetManifestResourceNames()
-                           where name.ToLowerInvariant().EndsWith("python_27_lib.zip")
+                           //where name.ToLowerInvariant().EndsWith("python_27_lib.zip")
+                           where name.ToLowerInvariant().EndsWith("python_34_lib.zip")
                            select name;
             var resName = resQuery.Single();
             var importer = new IronPython.Modules.ResourceMetaPathImporter(asm, resName);
