@@ -12,7 +12,7 @@ string installationDir = Path.Combine(rootDirectory, @"ProgramData\\Autodesk\\Ap
 const string projectName = "CADPythonShell";
 const string outputName = "CADPythonShell";
 const string outputDir = "output";
-const string version = "1.0.1";
+const string version = "1.0.2";
 
 var fileName = new StringBuilder().Append(outputName).Append("-").Append(version);
 var project = new Project
@@ -31,7 +31,7 @@ var project = new Project
     BannerImage = @"Installer\Resources\Icons\BannerImage.png",
     ControlPanelInfo =
     {
-        Manufacturer = "Autodesk",
+        Manufacturer = "ChuongMep",
         HelpLink = "https://github.com/chuongmep/CadPythonShell/issues",
         Comments = "Project Support Developer Write Python In Autocad And Civil3D",
         ProductIcon = @"Installer\Resources\Icons\ShellIcon.ico"
