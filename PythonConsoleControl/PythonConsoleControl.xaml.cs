@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ICSharpCode.AvalonEdit.Highlighting;
+using ICSharpCode.AvalonEdit.Rendering;
+using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 using System.IO;
+using System.Windows.Controls;
 using System.Xml;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Rendering;

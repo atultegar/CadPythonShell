@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2010 Joe Moorhouse
 
-using System;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
+using System;
 
 namespace PythonConsoleControl
 {
