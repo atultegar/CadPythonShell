@@ -51,7 +51,8 @@ WixEntity[] GenerateWixEntities()
     Console.WriteLine("Start Create Installer");
     var versionRegex = new Regex(@"\d+");
     var versionStorages = new List<WixEntity>();
-    if(args.Length==0) Console.WriteLine("Have some Problem with args build installer");
+    if (args.Length == 0) Console.WriteLine("Have some Problem with args build installer");
+    double count = 0;
     foreach (var directory in args)
     {
         Console.WriteLine($"Working with Directory: {directory}");
@@ -60,10 +61,14 @@ WixEntity[] GenerateWixEntities()
         var files = new Files($@"{directory}\*.*");
         versionStorages.Add(files);
         var assemblies = Directory.GetFiles(directory, "*", SearchOption.AllDirectories);
-        Console.WriteLine($"Adding '{fileVersion}' version files: ");
-        foreach (var assembly in assemblies) Console.WriteLine($"'{assembly}'");
+        Console.WriteLine($"Start add some files to msi: ");
+        foreach (var assembly in assemblies)
+        {
+            Console.WriteLine($"'{assembly}'");
+            count++;
+        }
     }
 
-    Console.WriteLine($"Added {versionStorages.Count} files to msi");
+    Console.WriteLine($"Added {count} files to msi");
     return versionStorages.ToArray();
 }

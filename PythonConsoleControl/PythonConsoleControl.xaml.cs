@@ -6,7 +6,6 @@ using System.Xml;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Rendering;
 
-
 namespace PythonConsoleControl
 {
     /// <summary>
@@ -14,7 +13,7 @@ namespace PythonConsoleControl
     /// </summary>
     public partial class IronPythonConsoleControl : UserControl
     {
-        PythonConsolePad pad;                
+        private PythonConsolePad pad;
 
         /// <summary>
         /// Perform the action on an already instantiated PythonConsoleHost.

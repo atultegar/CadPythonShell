@@ -1,10 +1,10 @@
-﻿using System;
+﻿using IronPython.Runtime.Exceptions;
+using Microsoft.Scripting;
+using Microsoft.Scripting.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IronPython.Runtime.Exceptions;
-using Microsoft.Scripting;
-using Microsoft.Scripting.Hosting;
 
 namespace CADRuntime
 {
@@ -19,7 +19,7 @@ namespace CADRuntime
         public ScriptExecutor(IRpsConfig config)
         {
             _config = config;
-            
+
             _message = "";
         }
 
@@ -67,7 +67,6 @@ namespace CADRuntime
                     return -1;
                 }
 
-
                 try
                 {
                     script.Execute(scope);
@@ -86,7 +85,6 @@ namespace CADRuntime
                     _message = exception.ToString();
                     return -1;
                 }
-
             }
             catch (Exception ex)
             {
@@ -97,7 +95,7 @@ namespace CADRuntime
 
         private ScriptEngine CreateEngine()
         {
-            var engine = IronPython.Hosting.Python.CreateEngine(new Dictionary<string, object>() { { "Frames", true }, { "FullFrames", true } });                        
+            var engine = IronPython.Hosting.Python.CreateEngine(new Dictionary<string, object>() { { "Frames", true }, { "FullFrames", true } });
             return engine;
         }
 
@@ -106,13 +104,13 @@ namespace CADRuntime
             // use embedded python lib
             var asm = this.GetType().Assembly;
             var resQuery = from name in asm.GetManifestResourceNames()
-                           //where name.ToLowerInvariant().EndsWith("python_27_lib.zip")
+                               //where name.ToLowerInvariant().EndsWith("python_27_lib.zip")
                            where name.ToLowerInvariant().EndsWith("python_34_lib.zip")
                            select name;
             var resName = resQuery.Single();
             var importer = new IronPython.Modules.ResourceMetaPathImporter(asm, resName);
             dynamic sys = IronPython.Hosting.Python.GetSysModule(engine);
-            sys.meta_path.append(importer);            
+            sys.meta_path.append(importer);
         }
 
         /// <summary>
@@ -133,7 +131,7 @@ namespace CADRuntime
             scope.SetVariable("__message__", _message);
             scope.SetVariable("__result__", 0);
 
-            // add two special variables: __revit__ and __vars__ to be globally visible everywhere:            
+            // add two special variables: __revit__ and __vars__ to be globally visible everywhere:
             var builtin = IronPython.Hosting.Python.GetBuiltinModule(engine);
             builtin.SetVariable("__vars__", _config.GetVariables());
 
@@ -145,7 +143,7 @@ namespace CADRuntime
             engine.Runtime.LoadAssembly(typeof(Autodesk.AutoCAD.ApplicationServices.Document).Assembly);
             // also, allow access to the RPS internals
             engine.Runtime.LoadAssembly(typeof(ScriptExecutor).Assembly);
-        }        
+        }
 
         /// <summary>
         /// Be nasty and reach into the ScriptScope to get at its private '_scope' member,
@@ -173,7 +171,6 @@ namespace CADRuntime
             engine.SetSearchPaths(searchPaths);
         }
     }
-
 
     public class ErrorReporter : ErrorListener
     {
