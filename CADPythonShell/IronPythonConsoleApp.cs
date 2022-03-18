@@ -47,9 +47,9 @@ namespace CADPythonShell
             RibbonButton rci = new RibbonButton();
             rci.Name = "Python Shell Console";
             rps.DialogLauncher = rci;
-            var addinAssembly = typeof(IronPythonConsoleApp).Assembly;
             //create button1
-            RibbonButton rb = new RibbonButton
+            var addinAssembly = typeof(IronPythonConsoleApp).Assembly;
+            RibbonButton btnPythonShell = new RibbonButton
             {
                 Orientation = Orientation.Vertical,
                 AllowInStatusBar = true,
@@ -62,24 +62,23 @@ namespace CADPythonShell
                 LargeImage = CADPythonShellApplication.GetEmbeddedPng(addinAssembly, "CADPythonShell.Resources.Python-32.png"),
                 CommandHandler = new RelayCommand(new IronPythonConsoleCommand().Execute)
             };
-            rps.Items.Add(rb);
+            rps.Items.Add(btnPythonShell);
             //create button2
-            RibbonButton rb2 = new RibbonButton
+            RibbonButton btnConfig = new RibbonButton
             {
                 Orientation = Orientation.Vertical,
                 AllowInStatusBar = true,
                 Size = RibbonItemSize.Large,
+                Name = "Configure CPS",
                 ShowText = true,
                 Text = "Configure CPS",
                 Description = "Configure Cad Python Shell\nCommand: PythonShellSetting",
                 Image = CADPythonShellApplication.GetEmbeddedPng(addinAssembly, "CADPythonShell.Resources.Settings-16.png"),
                 LargeImage = CADPythonShellApplication.GetEmbeddedPng(addinAssembly, "CADPythonShell.Resources.Settings-32.png"),
-                Name = "Configure CPS",
                 CommandHandler = new RelayCommand(new ConfigureCommand().Execute)
             };
-
             //Add the Button to the Tab
-            rps.Items.Add(rb2);
+            rps.Items.Add(btnConfig);
             return rp;
         }
     }
